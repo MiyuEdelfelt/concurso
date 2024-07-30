@@ -1,17 +1,31 @@
 import React from 'react';
 import QRCode from 'qrcode.react';
-import './App.css'; 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Concurso from './components/concurso';
+import './App.css';
 
 function App() {
-  const imageUrl = 'https://www.dropbox.com/scl/fi/gn3x5fgui028szhg7v9tr/bases-concurso.jpg?rlkey=lm0a0uhu31vjc6c16tvaq25vo&st=80f2y4sl&dl=0'; 
+  const qrValue = `${window.location.origin}/concurso`;
 
   return (
-    <div className="App">
-      <h1>Bases Concurso</h1>
-      <div className="qr-container">
-        <QRCode value={imageUrl} size={256} /> 
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div>
+                <h1>Bases Concurso</h1>
+                <div className="qr-container">
+                  <QRCode value={qrValue} size={256} />
+                </div>
+              </div>
+            }
+          />
+          <Route path="/concurso" element={<Concurso />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
